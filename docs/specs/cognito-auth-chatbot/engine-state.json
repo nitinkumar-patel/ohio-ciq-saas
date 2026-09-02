@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "run_id": "7fd6e89f-7c70-48fb-897f-09aaa93064d2",
+  "feature": "cognito-auth-chatbot",
+  "mode": "code",
+  "state": "CODE-IMPLEMENTATION",
+  "last_event": "plan-locked",
+  "last_event_context": null,
+  "transition_sequence": 13,
+  "last_transition_at": "2026-09-01T18:07:46Z",
+  "gate_question": null
+}

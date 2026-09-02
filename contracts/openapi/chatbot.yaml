@@ -1,0 +1,92 @@
+# Authored by hand — no `api-contract`-equivalent skill was installed when
+# this file was created, so it has not passed through an OpenAPI-standard
+# rule-enforcement pass. Treat it as a serviceable-but-unenforced contract
+# until such a skill reviews it.
+openapi: 3.0.3
+info:
+  title: Cognito Auth Chatbot API
+  version: 0.1.0
+  description: >-
+    Single-endpoint chat API. Clients send a valid Cognito ID token;
+    API Gateway's Cognito authorizer rejects any request that doesn't
+    carry one before it reaches the Lambda. (The authorizer's audience
+    check would also accept a matching access token, but that path is
+    untested and unused by this contract's clients — see the governing
+    spec's Follow-ons.)
+x-spec: [docs/specs/cognito-auth-chatbot/]
+servers:
+  - url: https://{apiId}.execute-api.us-east-2.amazonaws.com/{stage}
+    variables:
+      apiId:
+        default: changeme
+      stage:
+        default: prod
+paths:
+  /chat:
+    post:
+      operationId: sendChatMessage
+      summary: Send a chat message and receive the bot's reply.
+      security:
+        - cognitoAuthorizer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Bot reply generated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Request body failed validation (e.g. missing or empty `message`).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: >-
+            No bearer token was supplied, or the supplied Cognito token is
+            invalid or expired. Rejected by the API Gateway authorizer;
+            the Lambda is never invoked.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    cognitoAuthorizer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        AWS API Gateway (HTTP API) JWT authorizer backed by the Cognito user
+        pool defined in `infra/terraform/`. Bearer token is the Cognito ID
+        token issued to a pre-provisioned user after Hosted UI login.
+  schemas:
+    ChatRequest:
+      type: object
+      required: [message]
+      additionalProperties: false
+      properties:
+        message:
+          type: string
+          minLength: 1
+          maxLength: 2000
+          description: The user's chat message text.
+    ChatResponse:
+      type: object
+      required: [reply]
+      properties:
+        reply:
+          type: string
+          description: The bot's rule-based reply text.
+    ErrorResponse:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string

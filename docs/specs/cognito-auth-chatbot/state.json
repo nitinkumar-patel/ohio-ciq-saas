@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "run_id": "7fd6e89f-7c70-48fb-897f-09aaa93064d2",
+  "feature": "cognito-auth-chatbot",
+  "plan_review_status": "approved",
+  "approved_spec_hash": "2332c7575556c2b6fa62f0b8fa810a1f2ca3d176cfe5e4763af1caa28f56712a",
+  "approved_plan_hash": "9bab7a7e270bb63d5069235fa16cfb47737d57b79f800ffe67e717512ad1e2a5",
+  "plan_hash": "9bab7a7e270bb63d5069235fa16cfb47737d57b79f800ffe67e717512ad1e2a5",
+  "schedule_waves": [
+    [
+      "T0",
+      "T1"
+    ],
+    [
+      "T2"
+    ],
+    [
+      "T3"
+    ],
+    [
+      "T4"
+    ],
+    [
+      "T5"
+    ],
+    [
+      "T6"
+    ],
+    [
+      "T7"
+    ],
+    [
+      "T8"
+    ],
+    [
+      "T9"
+    ],
+    [
+      "T10"
+    ],
+    [
+      "T11"
+    ]
+  ],
+  "current_wave_index": 0,
+  "completed_task_ids": [],
+  "completed_task_section_hashes": {},
+  "completed_task_evidence": {},
+  "amendment_history": [],
+  "amendment_pending": null,
+  "implementation_retry_count": 0,
+  "max_implementation_retries": 5,
+  "last_record_attempt_cycle_id": null,
+  "review_round_count": 2,
+  "review_retry_count": 0,
+  "max_review_retries": 5,
+  "finding_fingerprints": [],
+  "previous_finding_fingerprints": [],
+  "last_review_clean_source": "report",
+  "last_review_clean_digest": "9c0eab05607059150e80b661069cd4817bfb34b8770e5ec4d308580ca104c293",
+  "auto_parallel": false,
+  "last_commit_sha": null,
+  "worktrees": []
+}

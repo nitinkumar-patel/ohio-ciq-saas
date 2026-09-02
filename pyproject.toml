@@ -1,0 +1,22 @@
+[project]
+name = "ohio-ciq-saas"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "agentbundle>=0.39.4",
+]
+
+[dependency-groups]
+dev = [
+    "checkov",
+    "pytest",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["backend/lambda"]
+# test_integration.py is manual/opt-in (live AWS calls, ~15min wall clock) --
+# excluded from the default `pytest backend/lambda/tests` run; invoke it
+# explicitly by path when the stack is deployed.
+addopts = "--ignore=backend/lambda/tests/test_integration.py"
